@@ -46,6 +46,67 @@
         <a-plane src="#card3" position="0 0 0" rotation="0 0 0" scale="1.0 1.5 1.0" alpha-test="1" opacity="1"></a-plane>
       </a-entity>
     </a-scene>
+<!-- 共用的收成圖片 -->
+<a-assets>
+  <img id="score" src="score.jpg">
+</a-assets>
+<script>
+  // Target 1
+  const target1 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets1.mind;"] a-entity[mindar-image-target]');
+  const plane1 = document.createElement('a-plane');
+  plane1.setAttribute('src', '#score');
+  plane1.setAttribute('width', '1');
+  plane1.setAttribute('height', '0.25');
+  plane1.setAttribute('position', '0 1 0');
+  plane1.setAttribute('visible', 'false');
+  target1.appendChild(plane1);
 
+  target1.addEventListener('targetFound', () => {
+    setTimeout(() => {
+      plane1.setAttribute('visible', true);
+    }, 2000);
+  });
+  target1.addEventListener('targetLost', () => {
+    plane1.setAttribute('visible', false);
+  });
+
+  // Target 2
+  const target2 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets2.mind;"] a-entity[mindar-image-target]');
+  const plane2 = document.createElement('a-plane');
+  plane2.setAttribute('src', '#score');
+  plane2.setAttribute('width', '1');
+  plane2.setAttribute('height', '0.25');
+  plane2.setAttribute('position', '0 1 0');
+  plane2.setAttribute('visible', 'false');
+  target2.appendChild(plane2);
+
+  target2.addEventListener('targetFound', () => {
+    setTimeout(() => {
+      plane2.setAttribute('visible', true);
+    }, 2000);
+  });
+  target2.addEventListener('targetLost', () => {
+    plane2.setAttribute('visible', false);
+  });
+
+  // Target 3
+  const target3 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets3.mind;"] a-entity[mindar-image-target]');
+  const plane3 = document.createElement('a-plane');
+  plane3.setAttribute('src', '#score');
+  plane3.setAttribute('width', '1');
+  plane3.setAttribute('height', '0.25');
+  plane3.setAttribute('position', '0 1 0');
+  plane3.setAttribute('visible', 'false');
+  target3.appendChild(plane3);
+
+  target3.addEventListener('targetFound', () => {
+    setTimeout(() => {
+      plane3.setAttribute('visible', true);
+    }, 2000);
+  });
+  target3.addEventListener('targetLost', () => {
+    plane3.setAttribute('visible', false);
+  });
+</script>
   </body>
 </html>
