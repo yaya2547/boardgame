@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: targets1.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: a1.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <video id="card1" autoplay loop="true" src="v1.mp4"></video>
         <!-- <img id="card1" src="b1.png" /> -->
@@ -21,7 +21,7 @@
       
     </a-scene>
 
-    <a-scene mindar-image="imageTargetSrc: targets2.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: a2.mind;" color-space="sRGB" height="0.5" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <video id="card2" autoplay loop="true" src="v2.mp4"></video>
         <!-- <img id="card2" src="b2.jpg" /> -->
@@ -30,12 +30,12 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0" light="type: ambient; intensity: 1;">
-        <a-plane src="#card2" position="0 0 0" rotation="0 0 0" scale="1.0 1.5 1.0" alpha-test="1" opacity="1"></a-plane>
+        <a-plane src="#card2" position="0 0 0" rotation="0 0 0"></a-plane>
         <!-- <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> -->
       </a-entity>
     </a-scene>
 
-    <a-scene mindar-image="imageTargetSrc: targets3.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: a3.mind;" color-space="sRGB" height="0.5" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <video id="card3" autoplay loop="true" src="v3.mp4"></video>
         <!-- <img id="card3" src="b3.jpg" /> -->
@@ -43,70 +43,9 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0" light="type: ambient; intensity: 1;">
-        <a-plane src="#card3" position="0 0 0" rotation="0 0 0" scale="1.0 1.5 1.0" alpha-test="1" opacity="1"></a-plane>
+        <a-plane src="#card3" position="0 0 0" rotation="0 0 0"></a-plane>
       </a-entity>
     </a-scene>
-<!-- 共用的收成圖片 -->
-<a-assets>
-  <img id="score" src="score.jpg">
-</a-assets>
-<script>
-  // Target 1
-  const target1 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets1.mind;"] a-entity[mindar-image-target]');
-  const plane1 = document.createElement('a-plane');
-  plane1.setAttribute('src', '#score');
-  plane1.setAttribute('width', '1');
-  plane1.setAttribute('height', '0.25');
-  plane1.setAttribute('position', '0 1 0');
-  plane1.setAttribute('visible', 'false');
-  target1.appendChild(plane1);
 
-  target1.addEventListener('targetFound', () => {
-    setTimeout(() => {
-      plane1.setAttribute('visible', true);
-    }, 2000);
-  });
-  target1.addEventListener('targetLost', () => {
-    plane1.setAttribute('visible', false);
-  });
-
-  // Target 2
-  const target2 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets2.mind;"] a-entity[mindar-image-target]');
-  const plane2 = document.createElement('a-plane');
-  plane2.setAttribute('src', '#score');
-  plane2.setAttribute('width', '1');
-  plane2.setAttribute('height', '0.25');
-  plane2.setAttribute('position', '0 1 0');
-  plane2.setAttribute('visible', 'false');
-  target2.appendChild(plane2);
-
-  target2.addEventListener('targetFound', () => {
-    setTimeout(() => {
-      plane2.setAttribute('visible', true);
-    }, 2000);
-  });
-  target2.addEventListener('targetLost', () => {
-    plane2.setAttribute('visible', false);
-  });
-
-  // Target 3
-  const target3 = document.querySelector('a-scene[mindar-image="imageTargetSrc: targets3.mind;"] a-entity[mindar-image-target]');
-  const plane3 = document.createElement('a-plane');
-  plane3.setAttribute('src', '#score');
-  plane3.setAttribute('width', '1');
-  plane3.setAttribute('height', '0.25');
-  plane3.setAttribute('position', '0 1 0');
-  plane3.setAttribute('visible', 'false');
-  target3.appendChild(plane3);
-
-  target3.addEventListener('targetFound', () => {
-    setTimeout(() => {
-      plane3.setAttribute('visible', true);
-    }, 2000);
-  });
-  target3.addEventListener('targetLost', () => {
-    plane3.setAttribute('visible', false);
-  });
-</script>
   </body>
 </html>
