@@ -1,57 +1,62 @@
+
 <html>
   <head>
+    <title>mindar</title>
+	  <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="multicore_logo.ico" sizes="32x32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: targets1.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <video id="card1" autoplay loop="true" src="v1.mp4" preload="auto" style="visibility: hidden;" autoplay muted loop 
-               playsinline webkit-playsinline crossorigin="anonymous"></video>
-        <!-- <img id="card1" src="b1.png" /> -->
-        <!-- <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item> -->
-      </a-assets>
+    <a-assets>
+      <video id="v01" src="./assets/v1.mp4" preload="auto" autoplay muted loop playsinline webkit-playsinline crossorigin="anonymous"></video>
+      <video id="v02" src="./assets/v2.mp4" preload="auto" autoplay muted loop playsinline webkit-playsinline crossorigin="anonymous"></video>
+      <video id="v03" src="./assets/v3.mp4" preload="auto" autoplay muted loop playsinline webkit-playsinline crossorigin="anonymous"></video>
+    </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0" light="type: ambient; intensity: 1;">
-       <a-plane src="#card1" position="0 0 0" rotation="0 0 0" scale="1.5 2.0 1.0" alpha-test="1" opacity="1"></a-plane>
-        <!-- <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> -->
-      </a-entity> 
-    
-    </a-scene>
-
-    <a-scene mindar-image="imageTargetSrc: targets2.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <video id="card2" autoplay loop="true" src="v2.mp4" preload="auto" style="visibility: hidden;" autoplay muted loop 
-               playsinline webkit-playsinline crossorigin="anonymous"></video>
-        <!-- <img id="card2" src="b2.jpg" /> -->
-        <!-- <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item> -->
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0" light="type: ambient; intensity: 1;">
-        <a-plane src="#card2" position="0 0 0" rotation="0 0 0" scale="1.5 2.0 1.0" alpha-test="1" opacity="1"></a-plane>
-        <!-- <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: true"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#v01" position="0 0 0" height="1.5" width="1.0878" rotation="0 0 0"></a-video>
+        <!-- <a-plane src="#v01" opaciy="0.25" position="0 0 0" height="1.5" width="1.0878" rotation="0 0 0"></a-plane> -->
       </a-entity>
-    
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane src="#v02" opaciy="0.25" position="0 0 0" height="1.5" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-plane src="#v03" opaciy="0.25" position="0 0 0" height="1.5" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
     </a-scene>
 
-    <a-scene mindar-image="imageTargetSrc: targets3.mind;" color-space="sRGB" height="0.8" width="0.5" renderer="colorManagement: true; physicallyCorrectLights: true" vr-mode-ui="enabled: false" light="defaultLightsEnabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <video id="card3" autoplay loop="true" src="v3.mp4" preload="auto" style="visibility: hidden;" autoplay muted loop 
-               playsinline webkit-playsinline crossorigin="anonymous"></video>
-        <!-- <img id="card3" src="b3.jpg" /> -->
-        <!-- <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item> -->
-      </a-assets>
+    <script>
+      for(i=0; i<3; i++){
+        const sceneEl = document.querySelector("a-scene");
+        const video = document.getElementById("v0"+(i+1));
+        const marker = document.querySelector('[mindar-image-target="targetIndex: '+i+'"]');
+        const mindarComponent = sceneEl.components["mindar-image"];
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0" light="type: ambient; intensity: 1;">
-        <a-plane src="#card3" position="0 0 0" rotation="0 0 0" scale="1.5 2.0 1.0" alpha-test="1" opacity="1"></a-plane>
-         <!-- <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> -->
-      </a-entity>   
-      
-    </a-scene>
+        sceneEl.addEventListener("renderstart", () => {
+          // 確保影片能夠播放：iOS Safari 需要用戶互動觸發播放
+          const allowPlay = () => {
+            video.play().catch(e => {
+              console.log("自動播放失敗，請點擊啟動", e);
+            });
+            window.removeEventListener('click', allowPlay);
+          };
+          window.addEventListener('click', allowPlay); // 使用者首次點擊啟動
+        });
+
+        marker.addEventListener("targetFound", () => {
+          video.play();
+        });
+
+        marker.addEventListener("targetLost", () => {
+          video.pause();
+        });
+      }
+    </script>
   </body>
 </html>
+
+<!-- https://www.moc2718.com/mindar_demo/index.html -->
